@@ -22,8 +22,21 @@ fortuneBtn.addEventListener('click', () => {
 mealBtn.addEventListener('click', () => {
     axios.get("https://www.themealdb.com/api/json/v1/1/random.php")
         .then(res => {
-            const mealName = document.createElement('li')
+            mealContainer.textContent = ''
+            // console.log(res.data.meals[0])
+            const mealName = document.createElement('h2')
             mealName.textContent = res.data.meals[0].strMeal
             mealContainer.appendChild(mealName)
+            const category = document.createElement('h3')
+            category.textContent = `Category: ${res.data.meals[0].strCategory}`
+            mealContainer.appendChild(category)
+
+            const slicedYoutube = res.data.meals[0].strYoutube.slice(-11)
+            console.log(slicedYoutube)
+            const embedYTLink = `https://www.youtube.com/embed/${slicedYoutube}`
+            const youtubeClip = document.createElement('iframe')
+            youtubeClip.src = embedYTLink
+            mealContainer.appendChild(youtubeClip)
+            
         })
 })
