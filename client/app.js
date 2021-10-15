@@ -23,7 +23,7 @@ mealBtn.addEventListener('click', () => {
     axios.get("https://www.themealdb.com/api/json/v1/1/random.php")
         .then(res => {
             mealContainer.textContent = ''
-            // console.log(res.data.meals[0])
+            console.log(res.data.meals[0])
             const mealName = document.createElement('h2')
             mealName.textContent = res.data.meals[0].strMeal
             mealContainer.appendChild(mealName)
@@ -31,8 +31,12 @@ mealBtn.addEventListener('click', () => {
             category.textContent = `Category: ${res.data.meals[0].strCategory}`
             mealContainer.appendChild(category)
 
+            const mealImg = document.createElement('img')
+            mealImg.src = res.data.meals[0].strMealThumb
+            mealContainer.appendChild(mealImg)
+
             const slicedYoutube = res.data.meals[0].strYoutube.slice(-11)
-            console.log(slicedYoutube)
+            // console.log(slicedYoutube)
             const embedYTLink = `https://www.youtube.com/embed/${slicedYoutube}`
             const youtubeClip = document.createElement('iframe')
             youtubeClip.src = embedYTLink
