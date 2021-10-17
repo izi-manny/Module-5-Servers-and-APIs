@@ -1,7 +1,8 @@
 const complimentBtn = document.getElementById("compliment-button")
 const fortuneBtn = document.getElementById("fortune-button")
 const mealBtn = document.getElementById("meal-button")
-const mealContainer = document.getElementById("meal-container")
+const content = document.getElementById("content")
+const clearBtn = document.getElementById("clear-button")
 
 complimentBtn.addEventListener('click', () => {
     axios.get("http://localhost:4000/api/compliment/")
@@ -19,28 +20,35 @@ fortuneBtn.addEventListener('click', () => {
         })
 })
 
+clearBtn.addEventListener('click', () => {
+    content.textContent = ''
+})
+
 mealBtn.addEventListener('click', () => {
     axios.get("https://www.themealdb.com/api/json/v1/1/random.php")
         .then(res => {
-            mealContainer.textContent = ''
+            content.textContent = ''
             console.log(res.data.meals[0])
             const mealName = document.createElement('h2')
             mealName.textContent = res.data.meals[0].strMeal
-            mealContainer.appendChild(mealName)
+            content.appendChild(mealName)
             const category = document.createElement('h3')
             category.textContent = `Category: ${res.data.meals[0].strCategory}`
-            mealContainer.appendChild(category)
+            content.appendChild(category)
 
             const mealImg = document.createElement('img')
             mealImg.src = res.data.meals[0].strMealThumb
-            mealContainer.appendChild(mealImg)
+            content.appendChild(mealImg)
 
+            const vidRecipeTitle = document.createElement('h3')
+            vidRecipeTitle.textContent = 'Video Recipe:'
+            content.appendChild(vidRecipeTitle)
             const slicedYoutube = res.data.meals[0].strYoutube.slice(-11)
             // console.log(slicedYoutube)
             const embedYTLink = `https://www.youtube.com/embed/${slicedYoutube}`
             const youtubeClip = document.createElement('iframe')
             youtubeClip.src = embedYTLink
-            mealContainer.appendChild(youtubeClip)
+            content.appendChild(youtubeClip)
             
         })
 })

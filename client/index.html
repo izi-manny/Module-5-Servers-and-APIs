@@ -5,15 +5,27 @@
     <title>Back End Assessment</title>
   </head>
   <body class="container">
-    <button id="compliment-button">Get a compliment</button>
 
-    <button id="fortune-button">Get a fortune</button>
+    <div id="compliment" class="feature">
+      <p>Feeling down?:</p>
+      <br>
+      <button id="compliment-button" class="noselect">Get a compliment</button>
+    </div>
 
+    <div id="fortune" class="feature">
+      <p>Need inspiration?</p>
+      <button id="fortune-button">Get a fortune</button>
+    </div>
 
-    <section id="random-meal">
+    <div id="meal" class="feature">
+      <p>Can't decide on a meal?</p>
       <button id="meal-button">Get a random meal</button>
-      <div id="meal-container"></div>
-    </section>
+    </div>
+
+    
+    <button id="clear-button">Clear page</button>
+   
+    <div id="content"></div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="app.js"></script>
